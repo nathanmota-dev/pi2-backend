@@ -1,16 +1,18 @@
+require('dotenv').config();
+
 module.exports = {
-    client: "mysql2",
+    client: process.env.DB_CLIENT,
     connection: {
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "bd-pi2"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
     },
-    poll: {
-        min: 2,
-        max: 10
+    pool: {
+        min: parseInt(process.env.DB_POOL_MIN, 10),
+        max: parseInt(process.env.DB_POOL_MAX, 10),
     },
     migrations: {
-        tableName: "knex_migrations"
-    }
-}
+        tableName: process.env.DB_MIGRATIONS_TABLE,
+    },
+};
